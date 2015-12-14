@@ -460,6 +460,37 @@ $.extend(prototype, {
     
 });
 
+$.extend(prototype,{
+	
+    /** 获取内容元素 */
+    getContent: function (value) {
+       return this._$('content');
+    },
+    
+    /**
+     * 控制按钮状态
+     * @param   {String, Object}
+     * Options: value, show, autofocus, disabled 
+     */
+    setButton:function(id,config){
+    	var theButton=this._$('footer').find('button').filter('[i-id='+id+']');
+    	if(theButton.length===1 && Object.prototype.toString.apply(config)==='[object Object]'){
+    		if('disabled' in config){
+	    		theButton.attr('disabled',config.disabled);
+    		}
+    		if('show' in config){
+    			config.show?theButton.show():theButton.hide();
+    		}
+    		if('value' in config) {
+    			theButton.html(config.value);
+    		}
+    		if('autofocus' in config) {
+    			config.autofocus?theButton.addClass('ui-dialog-autofocus'):theButton.removeClass('ui-dialog-autofocus');
+    		}
+    	}
+    }
+    
+})
 
 
 artDialog.oncreate = $.noop;
